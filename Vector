@@ -1,0 +1,65 @@
+class Point:
+    def __init__(self, s='0 0'):
+        #import ipdb; ipdb.set_trace()
+        coord=list(map(float, s.split()))
+        self.x=coord[0]
+        self.y=coord[1]
+    
+    def  __str__(self):
+       return "(" + str(self.x) + "," + str(self.y) + ")"
+    
+    def __add__(self, other):
+        return Point(self.x + other.x, self.y + other.y)
+    
+    def __sub__(self, other):
+        return Point(self.x - other.x, self.y - other.y)
+    
+    def __rsub__(self, other):
+        return Point(other.x - self.x, other.y - self.y)
+        
+    def __mul__(self, other):
+        return Point(self.x * other.x, self.y * other.y)
+    
+    def __rmul__(self, other):
+        return Point(other.x * self.x, other.y * self.y)
+    
+    def __truediv__(self, other):
+        return Point(self.x / other.x, self.y / other.y)
+    
+    def __rtruediv__(self, other):
+        return Point(other.x / self.x, other.y / self.y)
+    
+
+n=int(input())
+pmax=0
+xmax=0
+ymax=0
+Cx=0
+Cy=0
+#A=[]
+#B=[]
+Pts=[]
+for i in range(0,n):
+    s=input()
+    a = Point(s)
+    #A.append(a.x)
+    #B.append(a.y)
+    Pts.append(a)
+    p=((a.x)**2+(a.y)**2)**(1/2)
+    Cx=Cx+a.x
+    Cy=Cy+a.y
+    if p>pmax:
+        pmax=p
+        xmax=a.x
+        ymax=a.y
+print(xmax, ymax, Cx/n, Cy/n, list(map(str, Pts)))
+print(str(Pts[0]-Pts[1]))
+
+Pmax=0
+for l in range (0, n):
+    for j in range (l+1, n):
+        for k in range (l+2, n):
+            P=((A[l]-A[j])**2+(A[j]-A[k])**2+(A[l]-A[k])**2+(B[l]-B[j])**2+(B[j]-B[k])**2+(B[l]-B[k])**2)**(1/2)
+            if P>Pmax:
+                Pmax=P
+    print (Pmax)
